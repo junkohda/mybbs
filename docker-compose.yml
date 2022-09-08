@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  php-apache:
+    container_name: php-apache
+    build:
+      context: .
+      dockerfile: ./docker/php_apache/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./mybbs:/app
+      - ./docker/php_apache/php.ini:/usr/local/etc/php/php.ini
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: mysql:5.7
+    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userp
+      MYSQL_ROOT_PASSWORD: userp
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=user
+      - PMA_PASSWORD=userp
+    links:
+      - db
+    depends_on:
+      - db
+    ports:
+      - 8082:80
+    volumes:
+      - ./docker/phpmyadmin/phpmyadmin-misc.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
