@@ -7,10 +7,11 @@ services:
       context: .
       dockerfile: ./docker/php_apache/Dockerfile
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
       - ./mybbs:/app
       - ./docker/php_apache/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/php_apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     links:
       - db
     depends_on:
