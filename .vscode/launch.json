@@ -10,7 +10,7 @@
             "request": "launch",
             "port": 9001,
             "pathMappings": {
-                "/php-apashe/": "${workspaceFolder}/app"
+                "/app/": "${workspaceFolder}/mybbs"
             }
         },
     ]

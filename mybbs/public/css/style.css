@@ -1,0 +1,222 @@
+@charset "utf-8";
+
+/* 共通 */
+
+body,
+.v-application,
+.v-application .display-3,
+.v-application .headline,
+.v-application .body-2,
+.v-application .caption,
+.v-application .title,
+.v-application .subtitle-2 {
+    font-family: "Menlo" !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.v-content__wrap>.container {
+    width: 1200px;
+    margin-bottom: 30px;
+}
+
+.v-content {
+    margin-top: 60px;
+}
+
+.v-subheader {
+    color: #acacac !important;
+    height: 40px;
+}
+
+.v-text-field .v-input__slot {
+    border: 1px solid #bfbfbf !important;
+}
+
+.v-text-field.v-input--is-focused .v-input__slot,
+.v-data-table tr:hover {
+    background: #f5f9fd !important;
+}
+
+.v-btn {
+    text-transform: none;
+}
+
+.theme--dark.v-btn.v-btn--disabled:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
+    background-color: rgba(0, 0, 0, .12) !important;
+}
+
+.theme--dark.v-btn.v-btn--disabled {
+    color: rgba(0, 0, 0, .26) !important;
+}
+
+.p-fixed {
+    position: fixed;
+}
+
+
+/* header */
+
+.v-app-bar {
+    z-index: 21 !important;
+}
+
+.v-navigation-drawer {
+    z-index: 20 !important;
+    transition-property: transform, visibility, height;
+    transition-duration: .3s;
+    box-shadow: unset !important;
+}
+
+.v-navigation-drawer.v-navigation-drawer--close {
+    width: 100% !important;
+    height: 140px !important;
+    transform: translateY(-100%) !important;
+}
+
+.v-navigation-drawer.v-navigation-drawer--open {
+    top: 0px !important;
+    width: 100% !important;
+    height: 140px !important;
+    transform: translateY(45px) !important;
+}
+
+.v-navigation-drawer .container {
+    width: 1200px;
+}
+
+.v-navigation-drawer .v-icon {
+    font-size: 16px;
+}
+
+.v-toolbar {
+    box-shadow: unset;
+}
+
+.v-toolbar .container .v-btn:hover:before {
+    opacity: 0;
+}
+
+.v-navigation-drawer--open+.v-app-bar .mdi-menu::before {
+    content: "\F156";
+}
+
+@media screen and (max-width:1315px) {
+    .v-app-bar__nav-icon.p-fixed {
+        position: inherit;
+    }
+}
+
+
+/* footer */
+
+.v-footer {
+    color: #696969 !important;
+    font-size: 14px;
+}
+
+.v-footer .container {
+    min-width: 1200px;
+}
+
+
+/* data-table */
+
+.v-data-table {
+    border: 1px solid #e2e2e2;
+}
+
+.v-data-table th,
+.v-data-table td {
+    border-bottom: 1px solid #e2e2e2 !important;
+}
+
+.v-data-table th:not(:last-child),
+.v-data-table td:not(:last-child) {
+    border-right: 1px solid #e2e2e2;
+}
+
+.v-data-table th {
+    background: #fcfcfc;
+    color: #454545;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.v-data-table.not-fixed td:not(:first-child) {
+    white-space: nowrap;
+    min-width: 40px;
+}
+
+.v-data-table__selected {
+    background: #ffffff !important;
+}
+
+
+/* pagination */
+
+.v-pagination>li:first-child,
+.v-pagination>li:last-child {
+    visibility: hidden;
+}
+
+.v-pagination__item:not(.v-pagination__item--active) {
+    background-color: #eeeeee !important;
+}
+
+.v-pagination>li>button {
+    border: 1px solid #bfbfbf;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+
+/* Shadow none */
+
+.v-text-field,
+.v-text-field--solo:not(.v-text-field--solo-flat),
+.v-input__control,
+.v-input__slot {
+    box-shadow: none !important;
+}
+
+.v-btn--contained {
+    box-shadow: none !important;
+}
+
+
+/*
+data table header
+*/
+
+th[role=columnheader] {
+    background-color: #fcfcfc !important;
+    border-color: #e2e2e2 !important;
+    color: #454545 !important;
+}
+
+
+/*
+ページ行数ドロップダウン
+*/
+
+.v-data-footer .v-select__selection--comma {
+    margin-left: 12px !important;
+}
+
+
+/*
+共通フッタ　件数項目
+*/
+
+.footer-count-item-data {
+    display: inline-block;
+    margin-right: 4px;
+    width: 38px;
+}

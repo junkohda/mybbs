@@ -23,8 +23,18 @@ RUN apt-get update \
         && pecl install xdebug \
         && docker-php-ext-enable xdebug
 
+# Node.js
+RUN apt-get install -y nodejs npm
+RUN npm install n -g
+RUN n stable
+RUN apt-get purge -y nodejs npm
+
 # Composer install
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
+
+# install Node.js
+COPY --from=node:10.22 /usr/local/bin /usr/local/bin
+COPY --from=node:10.22 /usr/local/lib /usr/local/lib
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 

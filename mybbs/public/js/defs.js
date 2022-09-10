@@ -1,0 +1,98 @@
+var maxLenCommonCode = 5;
+var mailRegex1 = new RegExp('(?:[-!#-\'*+/-9=?A-Z^-~]+\.?(?:\.[-!#-\'*+/-9=?A-Z^-~]+)*|"(?:[!#-\[\]-~]|\\\\[\x09 -~])*")@[-!#-\'*+/-9=?A-Z^-~]+(?:\.[-!#-\'*+/-9=?A-Z^-~]+)*');
+var mailRegex2 = new RegExp('^[^\@]+\@[^\@]+$');
+var mailRegex3 = new RegExp('^[a-zA-Z0-9@,-_\+\.]*$');
+var maxLenDepotCode = 30;
+var maxLenSku = 50;
+var maxLenHikiateCnt = 5;
+var maxLenSkuKey = 10000;
+var maxLenJuchuNo = 50;
+var maxLenJuchuNoKey = 10000;
+var dateRegex = new RegExp('[0-9]{4}-[0-9]{2}-[0-9]{2}');
+var maxLenCustomerName = 255;
+var maxLenCustomerNameKana = 255;
+var maxLenSupplierCode = 20;
+var maxLenPaymentType = 50;
+var maxLenItemName = 100;
+var maxLenZipCode = 7;
+var zipRegex = new RegExp('[0-9]{7}');
+var maxLenAddress = 255;
+var maxLenTelNo = 16;
+var maxLenDeliveryMethodCode = 20;
+var maxLenLogiVal = 11;
+var maxLenSizeCode = 10;
+var maxLenHenpinSelected = 1;
+var maxLenLocation = 16;
+var maxLenStockCnt = 11;
+var maxLenHikiateCnt = 11;
+var maxLenLocation = 16;
+var maxLenCanDaibiki = 1;
+var maxLenDeliveryType = 2;
+var maxLenUserName = 50;
+var minLenPassword = 12;
+var maxLenPassword = 50;
+var maxLenGtinCd = 13;
+var dateStr = "yyyy-MM-dd";
+
+var errmsgKeyValUserMail = '正しいメールアドレスを入力してください';
+var errmsgKeyValUserPassword = 'パスワードを入力してください';
+var errmsgKeyValidationZaikosu = '在庫数は正の数を入力してください。';
+var errmsgKeyValidationDepot = '倉庫は' + maxLenDepotCode + '文字以内で入力してください。';
+var errmsgKeyValidationSku = 'SKUは' + maxLenSku + '文字以内で入力してください。';
+var errmsgKeyValidationSkuKey = 'SKUは' + maxLenSkuKey + '文字以内で入力してください。';
+var errmsgKeyValidationJuchuNo = '受注番号は' + maxLenJuchuNo + '文字以内で入力してください。';
+var errmsgKeyValidationJuchuNoKey = '受注番号は' + maxLenJuchuNoKey + '文字以内で入力してください。';
+var errmsgKeyValidationOrderDate = '受注日は' + dateStr + 'の形式で入力してください。';
+var errmsgKeyValidationShopSelected = '店舗は' + maxLenCommonCode + '文字以内で入力してください。';
+var errmsgKeyValidationJuchuStatusSelected = 'ステータスは' + maxLenCommonCode + '文字以内で入力してください。';
+var errmsgKeyValidationSupplierCode = '仕入先は' + maxLenSupplierCode + '文字以内で入力してください。';
+var errmsgKeyValidationTotalFrom = '合計金額は' + maxLenSku + '文字以内で入力してください。';
+var errmsgKeyValidationTotalTo = '合計金額は' + maxLenSku + '文字以内で入力してください。';
+var errmsgKeyValidationCustomerName = '注文者氏名は' + maxLenCustomerNameKana + '文字以内で入力してください。';
+var errmsgKeyValidationPaymentTypeSelected = '支払い方法は' + maxLenPaymentType + '文字以内で入力してください。';
+var errmsgKeyValidationItemName = '商品名は' + maxLenItemName + '文字以内で入力してください。';
+var errmsgKeyValidationCustomerZip = '注文者郵便番号は' + maxLenZipCode + '文字以内で入力してください。';
+var errmsgKeyValidationCustomerAddress = '注文者住所は' + maxLenAddress + '文字以内で入力してください。';
+var errmsgKeyValidationCustomerTel = '注文者電話番号は' + maxLenTelNo + '文字以内で入力してください。';
+var errmsgKeyValidationDelivererZip = '配送先郵便番号は' + maxLenZipCode + '文字以内で入力してください。';
+var errmsgKeyValidationDelivererAddress = '配送先住所は' + maxLenAddress + '文字以内で入力してください。';
+var errmsgKeyValidationDelivererTel = '配送先電話番号は' + maxLenTelNo + '文字以内で入力してください。';
+var errmsgKeyValidationDeliveryMethodCode = '配送方法は' + maxLenDeliveryMethodCode + '文字以内で入力してください。';
+var errmsgKeyValidationDelivererId = '配送会社は' + maxLenCommonCode + '文字以内で入力してください。';
+var errmsgKeyValidationShipExpDate = '配送予定日は' + dateStr + 'の形式で入力してください。';
+var errmsgKeyValidationShipDate = '配送日は' + +dateStr + 'の形式で入力してください。';
+var errmsgKeyValidationDepotCode = '配送倉庫は' + maxLenDepotCode + '文字以内で入力してください。';
+var errmsgKeyValidationLogiVal = '物流係数は' + maxLenLogiVal + '文字以内の数字で入力してください。';
+var errmsgKeyValidationSizeCode = '荷物サイズは' + maxLenSizeCode + '文字以内で入力してください。';
+var errmsgKeyValidationHenpinSelected = '返品状態は' + maxLenHenpinSelected + '文字以内で入力してください。';
+
+var errmsgKeyValifdationDateIntegrity = '日付は FROM < TO の形式で入力してください。';
+var errmsgKeyValidationKingakuIntegrity = '金額は FROM < TO の形式で入力してください。';
+var errmsgKeyValidationKeisuIntegrity = '係数は FROM < TO の形式で入力してください。';
+
+var errmsgValValidationRequired = 'を入力してください。';
+var errmsgValValidationInt = 'は数字を入力してください。';
+var errmsgValValidationSku = 'SKUは' + maxLenSku + '文字以内で入力してください。';
+var errmsgValValidationOrderCntZero = '受注数は1以上の数字を入力してください。';
+var errmsgValValidationOrderCnt = '受注数は' + maxLenSku + '文字以内で入力してください。';
+var errmsgValValidationShipCnt = '出荷数は' + maxLenSku + '文字以内で入力してください。';
+var errmsgValValidationCustomerAddress = '注文者住所は' + maxLenAddress + '文字以内で入力してください。';
+var errmsgValValidationCustomerZip = '注文者郵便番号は' + maxLenZipCode + '文字以内で入力してください。';
+var errmsgValValidationDelivererAddress = '配送先住所は' + maxLenAddress + '文字以内で入力してください。';
+var errmsgValValidationDelivererZip = '配送先郵便番号は' + maxLenZipCode + '文字以内で入力してください。';
+var errmsgValValidationLocation = '棚番は' + maxLenLocation + '文字以内で入力してください。';
+var errmsgValValidationStockCnt = '在庫数量は' + maxLenStockCnt + '文字以内で入力してください。';
+var errmsgValValidationHikiateCnt = '引当数量は' + maxLenHikiateCnt + '文字以内で入力してください。';
+var errmsgValValidationDepotZipCd = '倉庫郵便番号は' + maxLenZipCode + '文字以内で入力してください。';
+var errmsgValValidationCanDaibiki = '代引き取扱フラグは' + maxLenCanDaibiki + '文字以内で入力してください。';
+var errmsgValValidationDeliveryType = '配送種別は' + maxLenDeliveryType + '文字以内で入力してください。';
+var errmsgValValidationUserName = 'ユーザー名は' + maxLenUserName + '文字以内で入力してください。';
+var errmsgValValidationPassword = "パスワードは" + minLenPassword + "文字以上、" + maxLenPassword + "文字以内で入力してください。";
+var errmsgValValidationGtinCd = "JANコードは" + maxLenGtinCd + "文字以内で入力してください。";
+
+
+function isIos() {
+    isIPad = /iPad|Macintosh/i.test(navigator.userAgent) &&
+        'ontouchend' in document;
+    return isIPad;
+}
