@@ -11,6 +11,8 @@ class MessageModel extends Model
 
     protected $table = 'messages';
 
+    public $timestamps = false;
+    
     public $incrementing  = true;
 
     protected $primaryKey = 'post_id';

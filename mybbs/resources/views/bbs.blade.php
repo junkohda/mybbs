@@ -7,13 +7,13 @@
 
 @section('page-content')
 
-<v-container class="pa-4">
+{{-- <v-container class="pa-4">
     <v-row no-gutters style="justify-content:flex-end">
         <v-col cols="1" class="pa-0">
             <v-btn dark rounded depressed color="#a7a7a7" width="120" v-on:click="show(1)"><b>Reflesh</b></v-btn>
         </v-col>
     </v-row>
-</v-container>
+</v-container> --}}
 
 
 <v-container class="pa-0">
@@ -48,7 +48,7 @@
     <v-row class="mb-2" no-gutters>
         <v-col cols="6">
             <v-container class="pa-0">
-                <form method="POST" action="/login">
+                <form action="{{ url('/submit') }}" method="POST">
                     @csrf
                     <v-row class="ma-3" no-gutters>
                         <v-text-field class="border rounded px-2 ml-2" type="text" label="投稿者" name="poster_name"></v-text-field>
@@ -57,7 +57,7 @@
                         <v-textarea class="border rounded px-2 ml-2" outlined name="message" label="本文"></v-textarea>
                     </v-row>
                     <v-row class="ma-3" no-gutters>
-                        <v-btn class="border rounded px-2 ml-4" @click="submit" depressed color="primary">投稿</v-btn>
+                        <v-btn type="submit" class="border rounded px-2 ml-4" depressed color="primary">投稿</v-btn>
                     </v-row>
                 </form>
             </v-container>
@@ -136,7 +136,32 @@
                 });
             },
             submit : function() {
-                
+                var req = new MaintApiRequestModel();
+                req.pageSize = vm.options.itemsPerPage;
+                var url = "api/bbs?page=" + pg;
+                axios.post(url, req)
+                .then(function(response)  {
+                    vm.items = response.data.data;
+                    vm.page = response.data.currentPage;
+                    vm.pageLast = response.data.lastPage;
+                    vm.total = response.data.total;
+                    if(vm.items != null) {
+                        vm.items.forEach(item => {
+                            if(item.message != null) {
+                                var reg = new RegExp("\n", "g");
+                                item.messageStr = item.message.replace(reg,"<br/>");
+                            }
+                        });
+                        vm.items.forEach(items => {
+                            if(items.__proc_result_text != null) {
+                                items.__proc_result_text = items.__proc_result_text.replace(/__/g, '\r\n');
+                            }
+                        });
+                    }
+                }).catch(function(error) {
+                    alertError(error);
+                    console.log(error);
+                });
             }
         }
     });

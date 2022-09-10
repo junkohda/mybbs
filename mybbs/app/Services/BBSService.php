@@ -32,6 +32,25 @@ class BBSService extends BaseService
     public function getThreadData(int $pageSize)
     {
         $result = $this->iMessageRepository->getMessages($pageSize);
+
+        return $result;
+    }
+
+    /**
+     * レスポンス投稿
+     *
+     * @param string $message
+     * @param string $poster_name
+     * @return BaseApiResponse $result
+     */
+    public function submit(string $message, string $poster_name)
+    {
+        $entity = new MessageEntity();
+
+        $entity->message = $message;
+        $entity->poster_name = $poster_name;
+
+        $result = $this->iMessageRepository->insertMessage($entity);
         
         return $result;
     }

@@ -21,6 +21,6 @@ interface IMessageRepository
      * @param MessageEntity $entity
      * @return bool
      */
-    public function insert(MessageEntity $entity): bool;
+    public function insertMessage(MessageEntity $entity): bool;
 
 }
