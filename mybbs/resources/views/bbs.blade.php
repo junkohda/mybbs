@@ -7,8 +7,6 @@
 
 @section('page-content')
 
-@csrf
-
 <v-container class="pa-4">
     <v-row no-gutters style="justify-content:flex-end">
         <v-col cols="1" class="pa-0">
@@ -46,7 +44,28 @@
             </v-container>
         </v-col>
     </v-row>
+
+    <v-row class="mb-2" no-gutters>
+        <v-col cols="6">
+            <v-container class="pa-0">
+                <form method="POST" action="/login">
+                    @csrf
+                    <v-row class="ma-3" no-gutters>
+                        <v-text-field class="border rounded px-2 ml-2" type="text" label="投稿者" name="poster_name"></v-text-field>
+                    </v-row>
+                    <v-row class="ma-3" no-gutters>
+                        <v-textarea class="border rounded px-2 ml-2" outlined name="message" label="本文"></v-textarea>
+                    </v-row>
+                    <v-row class="ma-3" no-gutters>
+                        <v-btn class="border rounded px-2 ml-4" @click="submit" depressed color="primary">投稿</v-btn>
+                    </v-row>
+                </form>
+            </v-container>
+        </v-col>
+    </v-row>
+
 </v-container>
+
 @endsection
 
 @section('page-script')
@@ -60,10 +79,10 @@
             nav: false,
             total: 0,
             listHeaders : [
-                {text: "処理", value: "funcName", width: "100px"},
-                {text: "状態", value: "statusName", width: "70px"},
-                {text: "前回処理", value: "lastDate", width: "70px"},
-                {text: "Result", value: "resultText", width: "120px"},
+                {text: "投稿ID", value: "post_id", width: "100px"},
+                {text: "投稿者", value: "poster_name", width: "70px"},
+                {text: "投稿日時", value: "created_at", width: "70px"},
+                {text: "本文", value: "message", width: "120px"},
             ],
             keyFunc : "",
             items : [],
@@ -91,7 +110,7 @@
             show : function(pg) {
                 var req = new MaintApiRequestModel();
                 req.pageSize = vm.options.itemsPerPage;
-                var url = "api/bbs" + pg;
+                var url = "api/bbs?page=" + pg;
                 axios.post(url, req)
                 .then(function(response)  {
                     vm.items = response.data.data;
@@ -116,6 +135,9 @@
                     console.log(error);
                 });
             },
+            submit : function() {
+                
+            }
         }
     });
     </script>

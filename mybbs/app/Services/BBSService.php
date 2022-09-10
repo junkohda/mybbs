@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Domains\Entities\MessageEntity;
 use App\Repositories\Messages\IMessageRepository;
 use App\Services\BaseService;
+use App\Http\Responses\BaseApiResponse;
 
 class BBSService extends BaseService
 {
@@ -25,19 +26,13 @@ class BBSService extends BaseService
     /**
      * 単一のスレッドを表示
      *
-     * @param integer $page
      * @param integer $pageSize
      * @return BaseApiResponse $result
      */
-    public function getThreadData(int $page, int $pageSize)
+    public function getThreadData(int $pageSize)
     {
-        $result = new BaseApiResponse();
-        $result->data = $this->iMessageRepository->getMessages($pageSize);
-
-        $result->currentPage = 1;
-        $result->lastPage = 1;
-        $result->total = count($this->dashboardData);
-
+        $result = $this->iMessageRepository->getMessages($pageSize);
+        
         return $result;
     }
 }

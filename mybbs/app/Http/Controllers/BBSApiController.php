@@ -20,7 +20,7 @@ class BBSApiController extends BaseController
     public function show(Request $request, BBSService $bbsService)
     {
         $bbsService->serviceName = self::serviceName;
-        $result = $bbsService->getDashboardData($request->page, $request->pageSize);
+        $result = $bbsService->getThreadData($request->pageSize);
 
         return $result;
     }
