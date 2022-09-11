@@ -7,6 +7,7 @@
 
 @section('page-content')
 
+<!-- 更新ボタン -->
 {{-- <v-container class="pa-4">
     <v-row no-gutters style="justify-content:flex-end">
         <v-col cols="1" class="pa-0">
@@ -15,33 +16,15 @@
     </v-row>
 </v-container> --}}
 
-
 <v-container class="pa-0">
     <v-row class="mb-2" no-gutters>
         <v-col>
-            <v-container class="pa-0">
-                <v-data-table 
-                    :headers="listHeaders"
-                    :items="items" class="elevation-1"
-                    :server-items-length="total"
-                    no-data-text="該当データなし"
-                    :options.sync="options"
-                    :disable-sort="true"
-                    :fixed-header="true"
-                    :hide-default-footer="true"
-                    :sort-by="[]"
-                >
-                    <template v-slot:item.message="{item}">
-                        <v-tooltip top>
-                            <template v-slot:activator="{ on }">
-                                <v-text-field solo flat dense hide-details v-model="item.message" readonly v-on="on"></v-text-field>
-                            </template>
-                            <span v-html="item.messageStr"></span>
-                        </v-tooltip>
-                    </template>
-                </v-data-table>
-
-            </v-container>
+            <v-card v-for="item in items" :key="item.post_id" width="200px" style="margin: 0 20px 0 0; width: 640px; height: 240px;">
+                <!-- [投稿者] / [投稿日時] -->
+                <v-card-title class="grey--text text-subtitle-1 mb-2">@{{ item.poster_name }} / @{{ formatter(item.created_at) }}</v-card-title>
+                <!-- [本文] -->
+                <v-card-text class="black--text text-body-2">@{{ item.message }}</v-card-text>
+            </v-card>
         </v-col>
     </v-row>
 
@@ -78,13 +61,6 @@
         data:  {
             nav: false,
             total: 0,
-            listHeaders : [
-                {text: "投稿ID", value: "post_id", width: "100px"},
-                {text: "投稿者", value: "poster_name", width: "70px"},
-                {text: "投稿日時", value: "created_at", width: "70px"},
-                {text: "本文", value: "message", width: "120px"},
-            ],
-            keyFunc : "",
             items : [],
             options: {
                 page: 1,
@@ -135,33 +111,15 @@
                     console.log(error);
                 });
             },
-            submit : function() {
-                var req = new MaintApiRequestModel();
-                req.pageSize = vm.options.itemsPerPage;
-                var url = "api/bbs?page=" + pg;
-                axios.post(url, req)
-                .then(function(response)  {
-                    vm.items = response.data.data;
-                    vm.page = response.data.currentPage;
-                    vm.pageLast = response.data.lastPage;
-                    vm.total = response.data.total;
-                    if(vm.items != null) {
-                        vm.items.forEach(item => {
-                            if(item.message != null) {
-                                var reg = new RegExp("\n", "g");
-                                item.messageStr = item.message.replace(reg,"<br/>");
-                            }
-                        });
-                        vm.items.forEach(items => {
-                            if(items.__proc_result_text != null) {
-                                items.__proc_result_text = items.__proc_result_text.replace(/__/g, '\r\n');
-                            }
-                        });
-                    }
-                }).catch(function(error) {
-                    alertError(error);
-                    console.log(error);
-                });
+            formatter : function(dataStr) {
+                if (!dataStr) return '';
+                value = dataStr.toString();
+                return value;
+            }
+        },
+        mounted() {
+            window.onload = ()=>{
+                this.show();
             }
         }
     });
